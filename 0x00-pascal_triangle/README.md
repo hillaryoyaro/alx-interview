@@ -1,0 +1,1 @@
+# Technical interview, Pascal Triangle
