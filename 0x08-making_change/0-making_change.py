@@ -1,22 +1,22 @@
-def makeChange(coins, total):
-    # Sort the coins in descending order
-    coins.sort(reverse=True)
-    
-    # Initialize a counter for the number of coins used
-    num_coins = 0
-    
-    # Iterate over each coin denomination
-    for coin in coins:
-        # While the remaining total is greater than or equal to the current coin value
-        while total >= coin:
-            # Subtract the coin value from the total and increment the coin counter
-            total -= coin
-            num_coins += 1
-    
-    # If the total is not zero, then it cannot be reached with the given coins
-    if total != 0:
-        return -1
-    
-    # Otherwise, return the number of coins used
-    return num_coins
+#!/usr/bin/python3
+"""Given an n x n 2D matrix, rotate it 90 degrees clockwise."""
 
+
+def makeChange(coins, total):
+    """Given a pile of coins of different values,
+       determine the fewest number of coins needed to meet a given amount total.
+       Takes O(n) run time.
+    """
+    if total <= 0:
+        return 0
+
+    current_total = 0
+    coin_used = 0
+    coins = sorted(coins, reverse=True)
+    for coin in coins:
+        r = (total-current_total)//coin
+        current_total += r*coin
+        coin_used += r
+        if current_total == total:
+            return coin_used
+    return -1
